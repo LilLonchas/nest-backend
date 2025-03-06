@@ -1,18 +1,18 @@
 import { Controller, Post, Body } from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { LoginDto } from './dto/login.dto';
+import { UserService } from '../user/user.service';
+import { CreateUserDto } from '../user/dto/create-user.dto';
 
-@Controller('auth')
-export class AuthController {
-  constructor(private authService: AuthService) {}
+@Controller('auth') 
+export class UsersController {
+  constructor(private readonly usersService: UserService) {}
 
-  // Ruta para manejar el inicio de sesión y obtener el JWT
+  @Post('register')
+  async register(@Body() createUserDto: CreateUserDto) {
+    return this.usersService.register(createUserDto);
+  }
+
   @Post('login')
-  async login(@Body() loginDto: LoginDto) {
-    const user = await this.authService.validateUser(loginDto.email, loginDto.password);
-    if (!user) {
-      throw new Error('Invalid credentials'); // Aquí deberías manejar el error adecuadamente
-    }
-    return this.authService.login(user);
+  async login(@Body() { username, password }: { username: string; password: string }) {
+    return this.usersService.login(username, password);
   }
 }

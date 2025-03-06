@@ -9,42 +9,42 @@ import { Product } from './entities/product.entity';
 export class ProductsService {
   constructor(
     @InjectRepository(Product)
-    private productRepository: Repository<Product>,  // Conexión a la base de datos para productos
+    private productRepository: Repository<Product>,  
   ) {}
 
-  // Crear un nuevo producto
+ 
   async create(createProductDto: CreateProductDto) {
-    const product = this.productRepository.create(createProductDto);  // Crear el producto a partir del DTO
-    await this.productRepository.save(product);  // Guardar el producto en la base de datos
-    return product;  // Retornar el producto recién creado
+    const product = this.productRepository.create(createProductDto);  
+    await this.productRepository.save(product);  
+    return product;  
   }
 
-  // Obtener todos los productos
+
   async findAll() {
-    return await this.productRepository.find();  // Recuperar todos los productos desde la base de datos
+    return await this.productRepository.find();  
   }
 
-  // Obtener un solo producto por su ID
+  
   async findOne(id: number) {
     return await this.productRepository.findOne({
-      where: { id },  // Usamos el objeto 'where' para especificar la búsqueda
+      where: { id },  
     });
   }
   
-  // Actualizar un producto
+ 
   async update(id: number, updateProductDto: UpdateProductDto) {
-    await this.productRepository.update(id, updateProductDto);  // Actualizar el producto con el ID y el DTO
-    return this.findOne(id);  // Retornar el producto actualizado
+    await this.productRepository.update(id, updateProductDto);  
+    return this.findOne(id);  
   }
 
-  // Eliminar un producto
+ 
   async remove(id: number) {
-    const product = await this.findOne(id);  // Buscar el producto por ID
+    const product = await this.findOne(id);  
     if (product) {
-      await this.productRepository.remove(product);  // Eliminar el producto de la base de datos
-      return { message: `Producto #${id} eliminado` };  // Mensaje de éxito
+      await this.productRepository.remove(product);  
+      return { message: `Producto #${id} eliminado` };  
     } else {
-      return { message: `Producto #${id} no encontrado` };  // Mensaje de error si no se encuentra
+      return { message: `Producto #${id} no encontrado` };  
     }
   }
 }

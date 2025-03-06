@@ -1,7 +1,7 @@
 import { Strategy } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable } from '@nestjs/common';
-import { JwtPayload } from './jwt-payload.interfaces'; // Crea esta interfaz para el payload del JWT
+import { JwtPayload } from './jwt-payload.interfaces'; 
 import { ExtractJwt } from 'passport-jwt';
 import { AuthService } from './auth.service';
 
@@ -9,8 +9,8 @@ import { AuthService } from './auth.service';
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(private authService: AuthService) {
     super({
-      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(), // Extrae el JWT del header 'Authorization'
-      secretOrKey: 'secretKey', // La misma clave secreta usada para firmar el JWT
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(), 
+      secretOrKey: 'secretKey', 
     });
   }
 
