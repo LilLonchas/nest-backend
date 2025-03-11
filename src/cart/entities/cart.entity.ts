@@ -1,18 +1,21 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-import { Product } from '../../products/entities/product.entity';
-import { User } from '../../user/entities/user.entity';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { User } from 'src/user/entities/user.entity';
+import { Product } from 'src/products/entities/product.entity';
 
 @Entity()
 export class Cart {
-  @PrimaryGeneratedColumn()
-  id: number;
+    @PrimaryGeneratedColumn()
+    id: number;
 
-  @ManyToOne(() => Product, (product) => product.id)
-  product: Product;
+    @ManyToOne(() => User, (user) => user.id)
+    user: User;
 
-  @ManyToOne(() => User, (user) => user.id)
-  user: User;
+    @ManyToOne(() => Product, (product) => product.id)
+    product: Product;
 
-  @Column()
-  quantity: number;
+    @Column()
+    quantity: number;
+
+    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+    createdAt: Date;
 }
