@@ -1,23 +1,26 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ProductsModule } from './products/products.module'; // Importa el módulo de productos
-import { Product } from './products/entities/product.entity'; // Importa la entidad Product
+import { ProductsModule } from './products/products.module'; 
+import { Product } from './products/entities/product.entity';
+import { UserModule } from './user/user.module';
+import { User } from './user/entities/user.entity';   
 
 @Module({
   imports: [
-    // Importa TypeOrmModule con la configuración del DataSource
+    
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost', // Cambia esto si tu base de datos está en otra dirección
+      host: 'localhost',
       port: 5432,
-      username: 'postgres', // Cambia este valor por tu usuario de PostgreSQL
-      password: 'juan', // Cambia este valor por tu contraseña de PostgreSQL
-      database: 'ecommerce', // Nombre de tu base de datos
-      entities: [Product], // Asegúrate de que las entidades estén bien configuradas
-      synchronize: true, // Usa true solo en desarrollo
-      logging: true, // Habilitar los logs para detectar posibles problemas
+      username: 'postgres', 
+      password: 'Ladrillo88',
+      database: 'ecommerce',
+      entities: [Product, User], 
+      synchronize: true, 
+      logging: true, 
     }),
-    ProductsModule, // Asegúrate de que el módulo de productos esté importado
+    ProductsModule,
+    UserModule, 
   ],
 })
 export class AppModule {}
