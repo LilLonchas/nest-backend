@@ -34,7 +34,7 @@ export class ProductsService {
  
   async update(id: number, updateProductDto: UpdateProductDto) {
     await this.productRepository.update(id, updateProductDto);  
-    return this.findOne(id);  
+    return this.findOne(id);
   }
 
  
